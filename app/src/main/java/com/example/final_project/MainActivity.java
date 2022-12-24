@@ -3,6 +3,7 @@ package com.example.final_project;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -28,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MediaPlayer gunsound = MediaPlayer.create(this,R.raw.gun);
+        Button platgun = (Button) this.findViewById(R.id.btn_start);
+        platgun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gunsound.start();
+            }
+        });
 
         btn_start = findViewById(R.id.btn_start);
         sb_horse_1 = findViewById(R.id.sb_horse_1);
