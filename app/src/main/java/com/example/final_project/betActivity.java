@@ -1,17 +1,20 @@
 package com.example.final_project;
 
-import static java.lang.Math.round;
-
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class betActivity extends AppCompatActivity {
@@ -37,7 +40,7 @@ public class betActivity extends AppCompatActivity {
         int newDeposit=50000;
         tv_deposit.setText("目前金額:"+newDeposit+"元");
         horseList.setAdapter(horseAdapter);
-
+        betInfo myBet=new betInfo();
         boolean flag=false;
         horseInfo[] horses;
         horses=new horseInfo[6];
@@ -61,11 +64,10 @@ public class betActivity extends AppCompatActivity {
         double SpeedSum=0.0;
         for(int i=0;i<6;i++){
             double tmp=1/((double)(horses[i].betOdd+1));
-            horses[i].Speed=Math.round(tmp*100.0)/100.0;
+            horses[i].Speed=(Math.round(tmp*100.0)/100.0)*2;
             SpeedSum=SpeedSum+horses[i].Speed;
 
         }
-
         for(int i=0;i<6;i++){
             double equityTmp=horses[i].Speed/SpeedSum;
            horses[i].equity=Math.round(equityTmp*10000.0)/100.0;
@@ -73,12 +75,55 @@ public class betActivity extends AppCompatActivity {
             System.out.println(horses[i].equity);
         }
         horseAdapter.notifyDataSetChanged();
+        myBet.horsesinfo=horses;
+        String myDepositStr=tv_deposit.getText().toString();
+        int Deposit=Integer.parseInt(myDepositStr.substring(myDepositStr.indexOf(":")+1,myDepositStr.length()-1));
+        myBet.Deposit=Deposit;
+        System.out.println(Deposit);
 
+        horseChoose.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                String selectedHorse="";
+                selectedHorse=horseChoose.getSelectedItem().toString();
+                myBet.betHorse=selectedHorse;
+                System.out.println(selectedHorse);
 
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
+        btn_bet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(ed_betPrice.getText().toString()==""){
+                    Toast.makeText(betActivity.this,"請輸入數值",Toast.LENGTH_SHORT).show();
+                }else{
+                    myBet.betPrice=Integer.parseInt(ed_betPrice.getText().toString());
 
+                    System.out.println("存款="+myBet.Deposit+"下注金額="+myBet.betPrice+"選擇的馬"+myBet.betHorse);
+                    Bundle Bundle_bet=new Bundle();
+                    Bundle_bet.putSerializable("bet_Info",myBet);
+                    Intent  Intent_bet=new Intent();//(this,)
+                    Intent_bet.putExtra("Bet",Bundle_bet);
+                    startActivity(Intent_bet);
+
+                }
+            }
+        });
     }
 }
+
+class betInfo  implements Serializable {
+    horseInfo[] horsesinfo;
+    String betHorse;
+    int Deposit;
+    int betPrice;
+}
+
 
 class horseInfo{
     int betOdd;
