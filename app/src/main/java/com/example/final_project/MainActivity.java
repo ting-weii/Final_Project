@@ -3,6 +3,7 @@ package com.example.final_project;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Toast;
+
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     private int progresshorse_1 = 0;
@@ -23,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private SeekBar sb_horse_1,sb_horse_2,sb_horse_3,sb_horse_4,sb_horse_5,sb_horse_6;
 
     private Button btn_start;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
         sb_horse_4 = findViewById(R.id.sb_horse_4);
         sb_horse_5 = findViewById(R.id.sb_horse_5);
         sb_horse_6 = findViewById(R.id.sb_horse_6);
-
+        Bundle bundle=getIntent().getExtras();
+        betInfo myBet=(betInfo) bundle.getSerializable("bet_Info");
+        System.out.println(myBet.betHorse);
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,12 +60,30 @@ public class MainActivity extends AppCompatActivity {
                 sb_horse_4.setProgress(0);
                 sb_horse_5.setProgress(0);
                 sb_horse_6.setProgress(0);
-                runhorse_1();
-                runhorse_2();
-                runhorse_3();
-                runhorse_4();
-                runhorse_5();
-                runhorse_6();
+
+                double[] equity=new double[myBet.horsesinfo.length];
+                double[] Speed=new double[myBet.horsesinfo.length];
+                for(int i=0;i<myBet.horsesinfo.length;i++){
+                    equity[i]=myBet.horsesinfo[i].equity;
+                    Speed[i]=myBet.horsesinfo[i].Speed;
+                }
+
+                Arrays.sort(equity);
+                Integer[] randomWeight=new Integer[myBet.horsesinfo.length];
+                for(int i=0;i<myBet.horsesinfo.length;i++){
+                    for(int j=0;j<myBet.horsesinfo.length;j++){
+                        if(equity[i]==myBet.horsesinfo[j].equity){
+                            randomWeight[i]=j;
+                        }
+                    }
+                }
+                System.out.println();
+                runhorse_1(Speed,Arrays.asList(randomWeight).indexOf(0));
+                runhorse_2(Speed,Arrays.asList(randomWeight).indexOf(1));
+                runhorse_3(Speed,Arrays.asList(randomWeight).indexOf(2));
+                runhorse_4(Speed,Arrays.asList(randomWeight).indexOf(3));
+                runhorse_5(Speed,Arrays.asList(randomWeight).indexOf(4));
+                runhorse_6(Speed,Arrays.asList(randomWeight).indexOf(5));
             }
         });
     }
@@ -121,8 +146,17 @@ public class MainActivity extends AppCompatActivity {
         }
     });
 
-    private void runhorse_1() {
+    private void runhorse_1(double[] Speed,int randomWeight) {
+        int runWeight=Speed.length-randomWeight;
+        boolean[] SpeedUpProbability=new boolean[Speed.length];
+        for(int i =0 ; i<SpeedUpProbability.length;i++){
+            SpeedUpProbability[i]=false;
+        }
+        for(int i=0;i<runWeight;i++){
+            SpeedUpProbability[i]=true;
+        }
         new Thread(()-> {
+            double speed=Speed[0];
             boolean[] sleepProbability = {true,true,false};
 
             while(progresshorse_1 <= 100 && progresshorse_2 <100 && progresshorse_3 <100 && progresshorse_4 <100 && progresshorse_5 <100 && progresshorse_6 <100)
@@ -133,7 +167,8 @@ public class MainActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                progresshorse_1 += 1.7;
+
+                progresshorse_1 += speed;
                 Message msg  = new Message();
                 msg.what = 1;
                 handler.sendMessage(msg);
@@ -141,10 +176,19 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
-    private void runhorse_2() {
+    private void runhorse_2(double[] Speed,int randomWeight) {
+        int runWeight=Speed.length-randomWeight;
+        boolean[] SpeedUpProbability=new boolean[Speed.length];
+        for(int i =0 ; i<SpeedUpProbability.length;i++){
+            SpeedUpProbability[i]=false;
+        }
+        for(int i=0;i<runWeight;i++){
+            SpeedUpProbability[i]=true;
+        }
         new Thread(()-> {
-            boolean[] sleepProbability = {true,true,false};
 
+            boolean[] sleepProbability = {true,true,false};
+            double speed=Speed[1];
             while(progresshorse_2 <= 100 && progresshorse_1 <100 && progresshorse_3 <100 && progresshorse_4 <100 && progresshorse_5 <100 && progresshorse_6 <100)
             {
                 try{
@@ -153,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                progresshorse_2 += 1.9;
+                progresshorse_2 += speed;
                 Message msg  = new Message();
                 msg.what = 2;
                 handler.sendMessage(msg);
@@ -161,10 +205,20 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
-    private void runhorse_3() {
+    private void runhorse_3(double[] Speed,int randomWeight) {
+        int runWeight=Speed.length-randomWeight;
+        boolean[] SpeedUpProbability=new boolean[Speed.length];
+        for(int i =0 ; i<SpeedUpProbability.length;i++){
+            SpeedUpProbability[i]=false;
+        }
+        for(int i=0;i<runWeight;i++){
+            SpeedUpProbability[i]=true;
+        }
         new Thread(()-> {
-            boolean[] sleepProbability = {true,true,false};
 
+
+            boolean[] sleepProbability = {true,true,false};
+            double speed=Speed[2];
             while(progresshorse_3 <= 100 && progresshorse_1 <100 && progresshorse_2 <100 && progresshorse_4 <100 && progresshorse_5 <100 && progresshorse_6 <100)
             {
                 try{
@@ -173,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                progresshorse_3 += 1;
+                progresshorse_3 += speed;
                 Message msg  = new Message();
                 msg.what = 3;
                 handler.sendMessage(msg);
@@ -181,10 +235,19 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
-    private void runhorse_4() {
+    private void runhorse_4(double[] Speed,int randomWeight) {
+        int runWeight=Speed.length-randomWeight;
+        boolean[] SpeedUpProbability=new boolean[Speed.length];
+        for(int i =0 ; i<SpeedUpProbability.length;i++){
+            SpeedUpProbability[i]=false;
+        }
+        for(int i=0;i<runWeight;i++){
+            SpeedUpProbability[i]=true;
+        }
         new Thread(()-> {
-            boolean[] sleepProbability = {true,true,false};
 
+            boolean[] sleepProbability = {true,true,false};
+            double speed=Speed[3];
             while(progresshorse_4 <= 100 && progresshorse_1 <100 && progresshorse_3 <100 && progresshorse_2 <100 && progresshorse_5 <100 && progresshorse_6 <100)
             {
                 try{
@@ -193,7 +256,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                progresshorse_4 += 1.1;
+                progresshorse_4 += speed;
                 Message msg  = new Message();
                 msg.what = 4;
                 handler.sendMessage(msg);
@@ -201,10 +264,19 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
-    private void runhorse_5() {
+    private void runhorse_5(double[] Speed,int randomWeight) {
+        int runWeight=Speed.length-randomWeight;
+        boolean[] SpeedUpProbability=new boolean[Speed.length];
+        for(int i =0 ; i<SpeedUpProbability.length;i++){
+            SpeedUpProbability[i]=false;
+        }
+        for(int i=0;i<runWeight;i++){
+            SpeedUpProbability[i]=true;
+        }
         new Thread(()-> {
-            boolean[] sleepProbability = {true,true,false};
 
+            boolean[] sleepProbability = {true,true,false};
+            double speed=Speed[4];
             while(progresshorse_5 <= 100 && progresshorse_1 <100 && progresshorse_3 <100 && progresshorse_4 <100 && progresshorse_2 <100 && progresshorse_6 <100)
             {
                 try{
@@ -213,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                progresshorse_5 += 1.3;
+                progresshorse_5 += speed;
                 Message msg  = new Message();
                 msg.what = 5;
                 handler.sendMessage(msg);
@@ -221,10 +293,20 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
-    private void runhorse_6() {
+    private void runhorse_6(double[] Speed,int randomWeight) {
+        int runWeight=Speed.length-randomWeight;
+        boolean[] SpeedUpProbability=new boolean[Speed.length];
+        for(int i =0 ; i<SpeedUpProbability.length;i++){
+            SpeedUpProbability[i]=false;
+        }
+        for(int i=0;i<runWeight;i++){
+            SpeedUpProbability[i]=true;
+        }
         new Thread(()-> {
-            boolean[] sleepProbability = {true,true,false};
 
+
+            boolean[] sleepProbability = {true,true,false};
+            double speed=Speed[5];
             while(progresshorse_6 <= 100 && progresshorse_1 <100 && progresshorse_3 <100 && progresshorse_4 <100 && progresshorse_5 <100 && progresshorse_2 <100)
             {
                 try{
@@ -233,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                progresshorse_6 += 1.2;
+                progresshorse_6 += speed;
                 Message msg  = new Message();
                 msg.what = 6;
                 handler.sendMessage(msg);

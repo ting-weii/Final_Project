@@ -50,7 +50,19 @@ public class betActivity extends AppCompatActivity {
         while(!flag){
             int cnt=0;
             for(int i=0;i<6;i++){
+                boolean sameFlag=true;
                 horses[i].betOdd=(int)Math.round(Math.random()*15)+1;
+                while(sameFlag){
+                    for(int j=0;j<6;j++){
+
+                        if((horses[i].betOdd==horses[j].betOdd)&& (i!=j) ){
+                            sameFlag=true;
+                            horses[i].betOdd=(int)Math.round(Math.random()*15)+1;
+                            break;
+                        }else sameFlag=false;
+
+                    }
+                }
             }
             for(int i=0;i<6;i++){
                 if(horses[i].betOdd<5){
@@ -64,15 +76,16 @@ public class betActivity extends AppCompatActivity {
         double SpeedSum=0.0;
         for(int i=0;i<6;i++){
             double tmp=1/((double)(horses[i].betOdd+1));
-            horses[i].Speed=(Math.round(tmp*100.0)/100.0)*2;
+            horses[i].Speed=(Math.round(tmp*100.0)*17/100.0);
             SpeedSum=SpeedSum+horses[i].Speed;
 
         }
         for(int i=0;i<6;i++){
+            System.out.println(horses[i].Speed);
             double equityTmp=horses[i].Speed/SpeedSum;
            horses[i].equity=Math.round(equityTmp*10000.0)/100.0;
            horse.add((i+1)+"號馬"+"\t 賠率:"+horses[i].betOdd+"\t 綜合能力值:"+horses[i].Speed+"\t 勝率:"+horses[i].equity+"%");
-            System.out.println(horses[i].equity);
+
         }
         horseAdapter.notifyDataSetChanged();
         myBet.horsesinfo=horses;
@@ -107,8 +120,8 @@ public class betActivity extends AppCompatActivity {
                     System.out.println("存款="+myBet.Deposit+"下注金額="+myBet.betPrice+"選擇的馬"+myBet.betHorse);
                     Bundle Bundle_bet=new Bundle();
                     Bundle_bet.putSerializable("bet_Info",myBet);
-                    Intent  Intent_bet=new Intent();//(this,)
-                    Intent_bet.putExtra("Bet",Bundle_bet);
+                    Intent  Intent_bet=new Intent(betActivity.this,MainActivity.class);
+                    Intent_bet.putExtras(Bundle_bet);
                     startActivity(Intent_bet);
 
                 }
@@ -118,6 +131,7 @@ public class betActivity extends AppCompatActivity {
 }
 
 class betInfo  implements Serializable {
+    static  final long serialVersionUID=1L;
     horseInfo[] horsesinfo;
     String betHorse;
     int Deposit;
@@ -125,7 +139,7 @@ class betInfo  implements Serializable {
 }
 
 
-class horseInfo{
+class horseInfo  implements Serializable{
     int betOdd;
     double Speed;
     double equity;
