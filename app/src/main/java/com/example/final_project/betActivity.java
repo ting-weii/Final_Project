@@ -51,13 +51,13 @@ public class betActivity extends AppCompatActivity {
             int cnt=0;
             for(int i=0;i<6;i++){
                 boolean sameFlag=true;
-                horses[i].betOdd=(int)Math.round(Math.random()*15)+1;
+                horses[i].betOdd=(int)Math.round(Math.random()*7)+1;
                 while(sameFlag){
                     for(int j=0;j<6;j++){
 
                         if((horses[i].betOdd==horses[j].betOdd)&& (i!=j) ){
                             sameFlag=true;
-                            horses[i].betOdd=(int)Math.round(Math.random()*15)+1;
+                            horses[i].betOdd=(int)Math.round(Math.random()*7)+1;
                             break;
                         }else sameFlag=false;
 
