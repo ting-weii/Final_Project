@@ -25,11 +25,11 @@ public class MainActivity extends AppCompatActivity {
     private int progresshorse_5 = 0;
     private int progresshorse_6 = 0;
     private int[] WinnerHorse = new int[3];
-    private int Winnerindex = 0;
+    private static int Winnerindex = 0;
     private SeekBar sb_horse_1, sb_horse_2, sb_horse_3, sb_horse_4, sb_horse_5, sb_horse_6;
 
     private Button btn_start;
-
+    private Button text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,18 @@ public class MainActivity extends AppCompatActivity {
                 gunsound.start();
             }
         });
+
+
+        text = findViewById(R.id.text);
+        text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent();
+                Log.d("text",Arrays.toString(WinnerHorse));
+
+            }
+        });
+
 
         btn_start = findViewById(R.id.btn_start);
         sb_horse_1 = findViewById(R.id.sb_horse_1);
@@ -160,8 +172,8 @@ public class MainActivity extends AppCompatActivity {
                     btn_start.setEnabled(true);
                 }
             }
-            }
 
+            }
             return false;
         }
     });
@@ -195,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
                     msg.what = 1;
                     handler.sendMessage(msg);
                 }
-            }
+            }else{intent();}
         }).start();
     }
 
@@ -230,9 +242,7 @@ public class MainActivity extends AppCompatActivity {
                     handler.sendMessage(msg);
                 }
             }else{
-//                Intent intent =new Intent(MainActivity.this);
-//                intent.putExtra("Winners",WinnerHorse);
-//                startActivity(intent);
+                intent();
             }
 
         }).start();
@@ -266,6 +276,8 @@ public class MainActivity extends AppCompatActivity {
                     msg.what = 3;
                     handler.sendMessage(msg);
                 }
+            }else{
+                intent();
             }
         }).start();
     }
@@ -298,6 +310,8 @@ public class MainActivity extends AppCompatActivity {
                     msg.what = 4;
                     handler.sendMessage(msg);
                 }
+            }else{
+                intent();
             }
         }).start();
     }
@@ -330,6 +344,8 @@ public class MainActivity extends AppCompatActivity {
                     msg.what = 5;
                     handler.sendMessage(msg);
                 }
+            }else{
+                intent();
             }
         }).start();
     }
@@ -364,7 +380,17 @@ public class MainActivity extends AppCompatActivity {
                     msg.what = 6;
                     handler.sendMessage(msg);
                 }
+            }else{
+                intent();
             }
         }).start();
+    }
+
+    public void intent(){
+
+        Intent intent =new Intent(this,pdActivity.class);
+        intent.putExtra("Winners",WinnerHorse);
+        startActivity(intent);
+
     }
 }
