@@ -29,8 +29,8 @@
         android:id="@+id/textView3"
         android:layout_width="161dp"
         android:layout_height="47dp"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="232dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="236dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/podium" />
@@ -39,7 +39,7 @@
         android:id="@+id/textView4"
         android:layout_width="161dp"
         android:layout_height="44dp"
-        android:layout_marginStart="116dp"
+        android:layout_marginStart="124dp"
         android:layout_marginTop="4dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,6 +69,16 @@
         android:layout_height="108dp"
         android:layout_marginStart="232dp"
         android:layout_marginTop="184dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="608dp"
+        android:text="再輸一把"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

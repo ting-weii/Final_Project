@@ -387,10 +387,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void intent(){
-
+         progresshorse_1 = 0;
+         progresshorse_2 = 0;
+         progresshorse_3 = 0;
+         progresshorse_4 = 0;
+         progresshorse_5 = 0;
+         progresshorse_6 = 0;
+        Winnerindex = 0;
         Intent intent =new Intent(this,pdActivity.class);
         intent.putExtra("Winners",WinnerHorse);
         startActivity(intent);
+
 
     }
 }
