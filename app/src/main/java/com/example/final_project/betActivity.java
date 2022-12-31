@@ -24,6 +24,7 @@ public class betActivity extends AppCompatActivity {
     private ArrayList<String> horse=new ArrayList<>();
     private TextView tv_deposit;
     private EditText ed_betPrice;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +85,8 @@ public class betActivity extends AppCompatActivity {
             System.out.println(horses[i].Speed);
             double equityTmp=horses[i].Speed/SpeedSum;
            horses[i].equity=Math.round(equityTmp*10000.0)/100.0;
-           horse.add((i+1)+"號馬"+"\t\t\t 賠率:"+horses[i].betOdd+"\t\t\t 綜合能力值:"+horses[i].Speed+"\t\t\t 勝率:"+horses[i].equity+"%");
+           horse.add((i+1)+"號馬"+"\t\t\t\t\t 賠率:"+horses[i].betOdd+"\t\t\t\t\t 綜合能力值:"
+                   +horses[i].Speed+"\t\t\t\t\t 勝率:"+horses[i].equity+"%");
 
         }
         horseAdapter.notifyDataSetChanged();
