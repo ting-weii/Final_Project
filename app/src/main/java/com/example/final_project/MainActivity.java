@@ -25,6 +25,11 @@ public class MainActivity extends AppCompatActivity {
     private int progresshorse_5 = 0;
     private int progresshorse_6 = 0;
     private int[] WinnerHorse = new int[3];
+    private int Deposit ;
+    private int myBetValue;
+    private int myBetHorse;
+    private int myBetOdd;
+    private Boolean intentFlag=false;
     private static int Winnerindex = 0;
     private SeekBar sb_horse_1, sb_horse_2, sb_horse_3, sb_horse_4, sb_horse_5, sb_horse_6;
 
@@ -65,7 +70,12 @@ public class MainActivity extends AppCompatActivity {
         sb_horse_6 = findViewById(R.id.sb_horse_6);
         Bundle bundle = getIntent().getExtras();
         betInfo myBet = (betInfo) bundle.getSerializable("bet_Info");
-        System.out.println(myBet.betHorse);
+        Deposit=myBet.Deposit;
+        myBetValue=myBet.betPrice;
+        myBetHorse=Integer.parseInt(myBet.betHorse.split("號馬")[0]);
+        myBetOdd=myBet.horsesinfo[myBetHorse-1].betOdd;
+        System.out.println(myBetOdd);
+
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
                 progresshorse_4 = 0;
                 progresshorse_5 = 0;
                 progresshorse_6 = 0;
+                Winnerindex=0;
+                intentFlag=false;
                 sb_horse_1.setProgress(0);
                 sb_horse_2.setProgress(0);
                 sb_horse_3.setProgress(0);
@@ -113,13 +125,7 @@ public class MainActivity extends AppCompatActivity {
     private final Handler handler = new Handler(Looper.myLooper(), new Handler.Callback() {
         @Override
         public boolean handleMessage(@NonNull Message msg) {
-            Log.e("horse_1", String.valueOf(progresshorse_1));
-            Log.e("horse_2", String.valueOf(progresshorse_2));
-            Log.e("horse_3", String.valueOf(progresshorse_3));
-            Log.e("horse_4", String.valueOf(progresshorse_4));
-            Log.e("horse_5", String.valueOf(progresshorse_5));
-            Log.e("horse_6", String.valueOf(progresshorse_6));
-
+            System.out.println("runnning");
             if(Winnerindex<3){
 
 
@@ -173,6 +179,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
+            }else{
+                if(!intentFlag){
+                    intent();
+                    intentFlag=!intentFlag;
+                }
+
             }
             return false;
         }
@@ -207,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
                     msg.what = 1;
                     handler.sendMessage(msg);
                 }
-            }else{intent();}
+            }
         }).start();
     }
 
@@ -241,8 +253,6 @@ public class MainActivity extends AppCompatActivity {
                     msg.what = 2;
                     handler.sendMessage(msg);
                 }
-            }else{
-                intent();
             }
 
         }).start();
@@ -276,8 +286,6 @@ public class MainActivity extends AppCompatActivity {
                     msg.what = 3;
                     handler.sendMessage(msg);
                 }
-            }else{
-                intent();
             }
         }).start();
     }
@@ -310,8 +318,6 @@ public class MainActivity extends AppCompatActivity {
                     msg.what = 4;
                     handler.sendMessage(msg);
                 }
-            }else{
-                intent();
             }
         }).start();
     }
@@ -344,8 +350,6 @@ public class MainActivity extends AppCompatActivity {
                     msg.what = 5;
                     handler.sendMessage(msg);
                 }
-            }else{
-                intent();
             }
         }).start();
     }
@@ -380,22 +384,20 @@ public class MainActivity extends AppCompatActivity {
                     msg.what = 6;
                     handler.sendMessage(msg);
                 }
-            }else{
-                intent();
             }
         }).start();
     }
 
     public void intent(){
-         progresshorse_1 = 0;
-         progresshorse_2 = 0;
-         progresshorse_3 = 0;
-         progresshorse_4 = 0;
-         progresshorse_5 = 0;
-         progresshorse_6 = 0;
-        Winnerindex = 0;
+
         Intent intent =new Intent(this,pdActivity.class);
-        intent.putExtra("Winners",WinnerHorse);
+        Bundle bundle =new Bundle();
+        bundle.putIntArray("Winners",WinnerHorse);
+        bundle.putInt("Deposit",Deposit);
+        bundle.putInt("myBetHorse",myBetHorse);
+        bundle.putInt("myBetValue",myBetValue);
+        bundle.putInt("myBetOdd",myBetOdd);
+        intent.putExtras(bundle);
         startActivity(intent);
 
 

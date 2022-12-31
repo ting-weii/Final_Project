@@ -7,16 +7,6 @@
     tools:context=".pdActivity">
 
     <ImageView
-        android:id="@+id/podium"
-        android:layout_width="86dp"
-        android:layout_height="114dp"
-        android:layout_marginStart="216dp"
-        android:layout_marginTop="68dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/img_pd" />
-
-    <ImageView
         android:id="@+id/winnerhorse"
         android:layout_width="134dp"
         android:layout_height="108dp"
@@ -25,19 +15,69 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/podium"
+        android:layout_width="69dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="216dp"
+        android:layout_marginTop="108dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_pd" />
+
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="161dp"
+        android:id="@+id/tv_BetHorse"
+        android:layout_width="wrap_content"
         android:layout_height="47dp"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
         android:text="TextView"
         android:textSize="34sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/champion"
+        android:layout_width="161dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="16dp"
+        android:rotationX="0"
+        android:text="TextView"
+
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/winnerhorse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintStart_toStartOf="@+id/winnerhorse"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/second"
+        android:layout_width="160dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="20dp"
+        android:text="TextView"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/winnerhorse2"
+        app:layout_constraintStart_toStartOf="@+id/winnerhorse2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/third"
+        android:layout_width="161dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="28dp"
+        android:text="TextView"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/winnerhorse3"
+        app:layout_constraintStart_toStartOf="@+id/winnerhorse3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tv_Deposit"
         android:layout_width="161dp"
         android:layout_height="44dp"
         android:layout_marginTop="12dp"
@@ -46,7 +86,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.656"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_BetHorse" />
 
     <TextView
         android:id="@+id/textView5"
@@ -55,10 +95,10 @@
         android:layout_marginTop="12dp"
         android:text="餘額:"
         android:textSize="34sp"
-        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintEnd_toStartOf="@+id/tv_Deposit"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_BetHorse" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -95,7 +135,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="112dp"
         android:layout_marginTop="648dp"
-        android:text="再輸一把"
+        android:text="再玩一局"
         android:textSize="34sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -127,7 +167,7 @@
         android:layout_height="326dp"
         android:layout_marginTop="276dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.99"
+        app:layout_constraintHorizontal_bias="0.985"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/audience" />

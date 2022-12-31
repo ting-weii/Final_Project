@@ -158,22 +158,13 @@
 </LinearLayout>
 
     <Button
-        android:id="@+id/text"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="結果"
-        android:textSize="34sp"
-        app:layout_constraintStart_toEndOf="@id/btn_start"
-        app:layout_constraintBottom_toBottomOf="@id/btn_start"
-        android:layout_marginLeft="20dp"/>
-    <Button
         android:id="@+id/btn_start"
-        android:layout_width="140dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:text="開始"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/imageView9" />
 
     <ImageView

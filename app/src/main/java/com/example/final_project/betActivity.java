@@ -24,21 +24,25 @@ public class betActivity extends AppCompatActivity {
     private ArrayList<String> horse=new ArrayList<>();
     private TextView tv_deposit;
     private EditText ed_betPrice;
-
+    private  int newDeposit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.betpage);
+        newDeposit=this.getIntent().getIntExtra("Deposit",-1);
+        if(newDeposit==-1){
+            newDeposit=50000;
+        }
         btn_bet=findViewById(R.id.btn_bet);
         horseList=findViewById(R.id.horseList);
         horseChoose=findViewById(R.id.horseChoose);
         tv_deposit=findViewById(R.id.tv_deposit);
         ed_betPrice=findViewById(R.id.ed_betPrice);
         ArrayAdapter<String> horseAdapter= new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,horse);
-        String[] horseSpinnerArray=new String[]{"一號馬","二號馬","三號馬","四號馬","五號馬","六號馬"};
+        String[] horseSpinnerArray=new String[]{"1號馬","2號馬","3號馬","4號馬","5號馬","6號馬"};
         ArrayAdapter<String> horseSpinnerAdapter=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,horseSpinnerArray);
         horseChoose.setAdapter(horseSpinnerAdapter);
-        int newDeposit=50000;
+
         tv_deposit.setText("目前金額:"+newDeposit+"元");
         horseList.setAdapter(horseAdapter);
         betInfo myBet=new betInfo();
