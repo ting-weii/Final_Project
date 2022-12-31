@@ -50,15 +50,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        text = findViewById(R.id.text);
-        text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent();
-                Log.d("text",Arrays.toString(WinnerHorse));
-
-            }
-        });
 
 
         btn_start = findViewById(R.id.btn_start);
