@@ -118,11 +118,11 @@ public class betActivity extends AppCompatActivity {
         btn_bet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(ed_betPrice.getText().toString()==""){
-                    Toast.makeText(betActivity.this,"請輸入數值",Toast.LENGTH_SHORT).show();
+
+                if(ed_betPrice.getText().toString().matches("")){
+                    Toast.makeText(betActivity.this,"請輸入金額",Toast.LENGTH_SHORT).show();
                 }else{
                     myBet.betPrice=Integer.parseInt(ed_betPrice.getText().toString());
-
                     System.out.println("存款="+myBet.Deposit+"下注金額="+myBet.betPrice+"選擇的馬"+myBet.betHorse);
                     Bundle Bundle_bet=new Bundle();
                     Bundle_bet.putSerializable("bet_Info",myBet);
